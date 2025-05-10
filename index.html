@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Himachal Pradesh - Explore Districts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Montserrat", sans-serif;
+      background: #f0f4f7;
+      color: #333;
+    }
+
+    nav {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.2);
+      /* Semi-transparent background */
+      backdrop-filter: blur(10px);
+      /* Blur effect */
+      padding: 15px 30px;
+      border-radius: 20px;
+      /* Rounded corners */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 50%;
+      z-index: 11111111;
+    }
+
+    nav h1 {
+      color: #1d201e;
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    nav button {
+      padding: 8px 20px;
+      border: none;
+      background-color: #2e3a59;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    nav button:hover {
+      background-color: #1a2338;
+    }
+
+    .hero {
+      background: url("https://images.unsplash.com/photo-1587731342753-dffb8c2aa9d7") center/cover no-repeat;
+      color: white;
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 5px black;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      text-shadow: 1px 1px 3px black;
+    }
+
+    .carousel {
+      margin: 3rem auto;
+      max-width: 90%;
+      overflow: hidden;
+      position: relative;
+      border-radius: 10px;
+      height: 50vh;
+    }
+
+    .carousel-images {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      height: 100%;
+    }
+
+    .carousel-images img {
+      width: 100%;
+      flex-shrink: 0;
+      object-fit: cover;
+      height: 100%;
+    }
+
+    .facts-section {
+      background: #ffffff;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .facts-section h3 {
+      font-size: 2rem;
+      color: #004d40;
+      margin-bottom: 1rem;
+    }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .fact {
+      background: #e0f2f1;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 3rem 0 1rem;
+      font-size: 2rem;
+      color: #004d40;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      .card-grid {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card h3 {
+      padding: 1rem;
+      text-align: center;
+      color: #004d40;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #004d40;
+      color: white;
+      margin-top: 3rem;
+    }
+
+    .ministry-section {
+      padding: 2rem 1rem;
+      background: #f0f4f8;
+    }
+
+    .ministry-card {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: auto;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .ministry-card img {
+      width: 100%;
+      max-width: 400px;
+      object-fit: cover;
+      border-top-left-radius: 1rem;
+      border-bottom-left-radius: 1rem;
+    }
+
+    .ministry-content {
+      flex: 1;
+      padding: 1.5rem;
+    }
+
+    .ministry-content h3 {
+      font-size: 1.8rem;
+      color: #2e3a59;
+      margin-bottom: 0.5rem;
+    }
+
+    .ministry-content p {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.6;
+      margin: 0.5rem 0;
+    }
+
+    .ministry-content ul {
+      padding-left: 1.5rem;
+      margin: 0.5rem 0;
+    }
+
+    .ministry-content li {
+      margin-bottom: 0.4rem;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 99999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background: white;
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-content h2 {
+      margin-bottom: 1rem;
+      color: #2e3a59;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .modal-content button {
+      width: 100%;
+      padding: 0.8rem;
+      background-color: #2e3a59;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    .modal-content button:hover {
+      background-color: #1a2338;
+    }
+
+    .close {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #999;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <h1>Himachal Explorer</h1>
+    <div id="auth-section">
+    </div>
+
+  </nav>
+
+  <!-- Image Carousel -->
+  <div class="carousel">
+    <div class="carousel-images" id="carousel-images">
+      <img
+        src="https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2023/11/06105321/Feature-11-1600x900.jpg"
+        alt="Manali Valley" />
+      <img
+        src="https://media.radissonhotels.net/image/destination-pages--apac/promotional/16256-148400-f75939540_3xl.jpg?impolicy=HomeHero"
+        alt="Snow in Himachal" />
+      <img src="https://www.himachal.exploreindia.in/wordpress/wp-content/uploads/2013/05/hp1.jpg" alt="Monastery" />
+      <img
+        src="https://plus.unsplash.com/premium_photo-1697729733902-f8c92710db07?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aGltYWNoYWx8ZW58MHx8MHx8fDA%3D"
+        alt="Monastery" />
+      <img src="https://images.pexels.com/photos/2961109/pexels-photo-2961109.jpeg" alt="Monastery" />
+    </div>
+  </div>
+
+  <h2 class="section-title">Explore Districts</h2>
+  <section class="card-grid">
+    <div class="card" onclick="navigateTo('shimla.html')">
+      <img
+        src="https://s7ap1.scene7.com/is/image/incredibleindia/cityscape-of-shimla-himachal-pradesh-city-1-hero?qlt=82&ts=1726730693575"
+        alt="Shimla" />
+      <h3>Shimla</h3>
+    </div>
+    <div class="card" onclick="navigateTo('solan.html')">
+      <img src="https://www.tripplannersindia.com/assets/blog/images/snowfallinsolan/Solan.webp" alt="Kullu" />
+      <h3>Solan</h3>
+    </div>
+    <div class="card" onclick="navigateTo('lahual.html')">
+      <img src="https://image.kesari.in/upload/HS/Chandratal-lake-KESARI-TOURS.jpg" alt="solan" />
+      <h3>Lahaul Spiti</h3>
+    </div>
+    <div class="card" onclick="navigateTo('kinnaur.html')">
+      <img
+        src="https://res.cloudinary.com/dyiffrkzh/image/upload/c_fill,f_auto,fl_progressive.strip_profile,g_center,h_400,q_auto,w_700/v1679152449/bbj/phlsn3ztbrsp5rbi7wru.jpg"
+        alt="kinnaur" />
+      <h3>Kinnaur</h3>
+    </div>
+    <div class="card" onclick="navigateTo('kangra.html')">
+      <img
+        src="https://s7ap1.scene7.com/is/image/incredibleindia/shree-bajreshwari-devi-temple-kangra-himachal-pradesh-city-2-hero?qlt=82&ts=1726730220643"
+        alt="Kangra" />
+      <h3>Kangra</h3>
+    </div>
+    <div class="card" onclick="navigateTo('kullu.html')">
+      <img src="https://static.tripzilla.in/media/50945/conversions/80a1e8bb-10a8-41e4-ab86-98fca116fabb-w768.webp"
+        alt="Kullu" />
+      <h3>Kullu</h3>
+    </div>
+    <!-- Add more districts as needed -->
+  </section>
+
+  <!-- Facts about Himachal -->
+  <section class="facts-section">
+    <h3>Quick Facts</h3>
+    <div class="facts-grid">
+      <div class="fact">
+        <strong>Capital:</strong> Shimla (Summer), Dharamshala (Winter)
+      </div>
+      <div class="fact">
+        <strong>Popular Festivals:</strong> Dussehra, Losar, Kullu Fair
+      </div>
+      <div class="fact">
+        <strong>Best Time to Visit:</strong> March to June & October
+      </div>
+      <div class="fact">
+        <strong>Adventure Activities:</strong> Trekking, Paragliding, River
+        Rafting
+      </div>
+      <div class="fact">
+        <strong>Famous Hill Stations:</strong> Manali, Dalhousie, Kasol, Kufri
+      </div>
+      <div class="fact">
+        <strong>Major Rivers:</strong> Beas, Sutlej, Ravi, Chenab
+      </div>
+      <div class="fact">
+        <strong>Local Cuisine:</strong> Dham, Siddu, Chha Gosht
+      </div>
+      <div class="fact">
+        <strong>Wildlife Sanctuaries:</strong> Great Himalayan National Park, Pin Valley, Kalatop
+      </div>
+      <div class="fact">
+        <strong>Local Cuisine:</strong> Dham, Siddu, Chha Gosht
+      </div>
+      <div class="fact">
+        <strong>Wildlife Sanctuaries:</strong> Great Himalayan National Park, Pin Valley, Kalatop
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-title">Latest Articles</h2>
+  <section class="card-grid">
+    <div class="card" onclick="alert('Redirecting to blog...')">
+      <img src="https://assets.zeezest.com/images/PROD_gochi%20festival_1704466122148.jpg" alt="Culture" />
+      <h3>Vibrant Himachali Culture & Traditions</h3>
+      <p style="padding: 0 1rem 1rem">
+        Explore the rich cultural heritage, unique folk dances, and
+        traditional attire of Himachal Pradesh.
+      </p>
+    </div>
+    <div class="card" onclick="alert('Redirecting to blog...')">
+      <img src="https://hodophileandfoodieme.com/wp-content/uploads/2023/04/HHT-himachal.jpg" alt="Cuisine" />
+      <h3>10 Must-Try Himachali Dishes</h3>
+      <p style="padding: 0 1rem 1rem">
+        From Dham to Siddu, uncover the flavors that define the mountain
+        state’s food culture.
+      </p>
+    </div>
+    <div class="card" onclick="alert('Redirecting to blog...')">
+      <img src="https://images.travelandleisureasia.com/wp-content/uploads/sites/3/2024/03/18201003/jibhi.jpeg"
+        alt="Travel Tips" />
+      <h3>Top 5 Hidden Travel Gems in Himachal</h3>
+      <p style="padding: 0 1rem 1rem">
+        Tired of the tourist crowd? Discover serene places only locals know
+        about.
+      </p>
+    </div>
+  </section>
+  <h2 class="section-title">Tourism & Culture Ministry</h2>
+  <section class="ministry-section">
+    <div class="ministry-card">
+      <img src="https://www.capertravelindia.com/images/himachal-3.jpg" alt="Ministry Image" />
+      <div class="ministry-content">
+        <h3>Ministry of Tourism, Himachal Pradesh</h3>
+        <p>
+          The Department of Tourism and Civil Aviation, Himachal Pradesh plays
+          a vital role in promoting the rich heritage, natural beauty, and
+          vibrant culture of the state. It undertakes initiatives to enhance
+          tourism infrastructure, preserve heritage sites, and encourage
+          eco-tourism.
+        </p>
+        <ul>
+          <li>Promotes sustainable tourism and eco-friendly travel</li>
+          <li>
+            Organizes cultural fairs and festivals like Kullu Dussehra &
+            Shimla Summer Festival
+          </li>
+          <li>Supports local artisans and folk traditions</li>
+          <li>Runs tourism development programs in remote districts</li>
+        </ul>
+        <p>
+          The department ensures a balance between development and
+          environmental conservation to protect the fragile Himalayan
+          ecosystem.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2025 Himachal Explorer | Made by Khushboo and Team</footer>
+  <!-- Modal -->
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Register</h2>
+      <form onsubmit="submitForm(event)">
+        <input type="text" placeholder="Full Name" required />
+        <input type="email" placeholder="Email Address" required />
+        <input type="tel" placeholder="Phone Number" required />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+
+    window.addEventListener("DOMContentLoaded", function () {
+      const authSection = document.getElementById("auth-section");
+      const users = JSON.parse(sessionStorage.getItem("registeredUsers"));
+
+      if (users && users.length > 0) {
+        authSection.innerHTML = `
+        <img src="https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg" 
+             alt="Profile" 
+             style="width: 40px; height: 40px; border-radius: 50%; cursor: pointer;" />
+      `;
+      } else {
+        // Show register button
+        authSection.innerHTML = `
+        <button onclick="openModal()" style="padding: 8px 16px;">Register</button>
+      `;
+      }
+    });
+    function navigateTo(page) {
+      window.location.href = page;
+    }
+
+    let index = 0;
+    const images = document.getElementById("carousel-images");
+    const totalImages = images.children.length;
+
+    setInterval(() => {
+      index = (index + 1) % totalImages;
+      images.style.transform = `translateX(-${index * 100}%)`;
+    }, 3000);
+
+    function openModal() {
+      document.getElementById("registerModal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("registerModal").style.display = "none";
+    }
+
+    function submitForm(e) {
+      e.preventDefault();
+      const fullName = e.target.querySelector('input[placeholder="Full Name"]').value;
+      const email = e.target.querySelector('input[placeholder="Email Address"]').value;
+      const phone = e.target.querySelector('input[placeholder="Phone Number"]').value;
+      const userData = {
+        fullName,
+        email,
+        phone,
+        timestamp: new Date().toISOString()
+      };
+      let allUsers = JSON.parse(sessionStorage.getItem("registeredUsers")) || [];
+      allUsers.push(userData);
+      sessionStorage.setItem("registeredUsers", JSON.stringify(allUsers));
+
+      alert("Thanks for registering!");
+      const authSection = document.getElementById("auth-section");
+      authSection.innerHTML = `
+        <img src="https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg" 
+             alt="Profile" 
+             style="width: 40px; height: 40px; border-radius: 50%; cursor: pointer;" />
+      `;
+
+      closeModal();
+    }
+    window.onclick = function (event) {
+      const modal = document.getElementById("registerModal");
+      if (event.target == modal) {
+        closeModal();
+      }
+    };
+  </script>
+</body>
+
+</html>
