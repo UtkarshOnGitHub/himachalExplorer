@@ -148,14 +148,20 @@
       .card-grid {
         grid-template-columns: repeat(1, 1fr);
       }
-      nav{
+
+      nav {
         width: 100%;
       }
-      nav h1{
+
+      nav h1 {
         font-size: 20px;
       }
-      .modal-content{
-        margin-top: 6rem;
+
+      .modal-content {
+        margin-top: 7rem !important;
+      }
+      .carousel{
+        margin-top: 5rem;
       }
     }
 
@@ -308,6 +314,60 @@
       cursor: pointer;
       color: #999;
     }
+
+    .hero-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4rem 2rem;
+      gap: 2rem;
+      background-color: #f4f4f4;
+      flex-wrap: wrap;
+    }
+
+    .hero-image {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .hero-text h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #2c3e50;
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .explore-btn {
+      padding: 0.75rem 1.5rem;
+      background-color: #2e8b57;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    .explore-btn:hover {
+      background-color: #246b44;
+    }
   </style>
 </head>
 
@@ -335,6 +395,36 @@
       <img src="https://images.pexels.com/photos/2961109/pexels-photo-2961109.jpeg" alt="Monastery" />
     </div>
   </div>
+
+  <section class="hero-section">
+    <div class="hero-image">
+      <img
+        src="https://s7ap1.scene7.com/is/image/incredibleindia/manu-temple-manali-1-city-hero?qlt=82&ts=1726731244457"
+        alt="Himachal Landscape">
+    </div>
+    <div class="hero-text">
+      <h1>Himachal Pradesh</h1>
+      <p>
+        Himachal Pradesh is a state in Northern India that was anciently known as Dev Bhumi, meaning the land of God.
+        This place is abundant with natural beauty. Himachal Pradesh is also known as the abode of snow because of the
+        high snowy mountains and cold climate. The attractive places for tourists in Himachal Pradesh are Shimla,
+        Manali, Kullu, Chamba and Dharamshala
+
+        Himachal Pradesh has many beautiful towns and hamlets all over the state. This state of India offers tourists a
+        variety of destinations to visit and relax. They can explore and enjoy different places in Himachal Pradesh in
+        the summer as well as in winter. This place respites from the heat in the plains during summer seasons whereas,
+        in winter, snow covers the terrains, delighting one and all who visit here.
+
+        In the 19th century, Himachal Pradesh received recognition during British time when they explored this hill
+        station. In 1864, Britishers declared Shimla as the summer capital of India. Before that, Himachal had been a
+        destination for pilgrims only. Once it has emerged as a tourist destination, local people easily earn their
+        livelihood from tourism. Tourism contributes nearly 8% of the State’s Domestic Product.
+      </p>
+      <a href="https://en.wikipedia.org/wiki/Himachal_Pradesh" target="_blank" class="explore-btn">Explore More</a>
+    </div>
+  </section>
+
+
 
   <h2 class="section-title">Explore Districts</h2>
   <section class="card-grid">
@@ -473,7 +563,7 @@
   <!-- Modal -->
   <div id="registerModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
+      <!-- <span class="close" onclick="closeModal()">&times;</span> -->
       <h2>Register</h2>
       <form onsubmit="submitForm(event)">
         <input type="text" placeholder="Full Name" required />
@@ -491,16 +581,10 @@
       const users = JSON.parse(sessionStorage.getItem("registeredUsers"));
 
       if (users && users.length > 0) {
-        authSection.innerHTML = `
-        <img src="https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg" 
-             alt="Profile" 
-             style="width: 40px; height: 40px; border-radius: 50%; cursor: pointer;" />
-      `;
+        authSection.innerHTML = `<img src="https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg"  alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; cursor: pointer;" />`;
       } else {
-        // Show register button
-        authSection.innerHTML = `
-        <button onclick="openModal()" style="padding: 8px 16px;">Register</button>
-      `;
+        authSection.innerHTML = `<button onclick="openModal()" style="padding: 8px 16px;">Register</button>`;
+      openModal();
       }
     });
     function navigateTo(page) {
@@ -549,12 +633,6 @@
 
       closeModal();
     }
-    window.onclick = function (event) {
-      const modal = document.getElementById("registerModal");
-      if (event.target == modal) {
-        closeModal();
-      }
-    };
   </script>
 </body>
 
